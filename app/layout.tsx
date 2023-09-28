@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider } from "@/providers/ModalProvider";
-import prismadb from "@/lib/prismadb";
+import { ToasterProvider } from "@/providers/ToastProvider";
+import { useDarkModeStore } from "@/hooks/zustandUtils";
+import DarkModeSwitchProvider from "@/providers/DarkModeSwitchProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +22,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang='en'>
-        <body className={`${inter.className} dark`}>
+        <body className={`${inter.className}`}>
+          <ToasterProvider />
           <ModalProvider />
+          <DarkModeSwitchProvider />
           {children}
         </body>
       </html>

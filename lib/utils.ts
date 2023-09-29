@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs";
+import dynamic from "next/dynamic";
 import { type ClassValue, clsx } from "clsx";
-import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
 import { twMerge } from "tailwind-merge";
 
@@ -9,6 +9,14 @@ import prismadb from "@/lib/prismadb";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+// Conditionally import the DarkModeSwitch component only on the client side
+export const DynamicDarkModeSwitch = dynamic(
+  () => import("@/components/DarkModeSwitch"),
+  {
+    ssr: false, // Disable server-side rendering for this component
+  }
+);
 
 export const getUserId = async () => {
   const { userId } = auth();

@@ -12,7 +12,11 @@ const DarkModeSwitch: React.FC = () => {
       <Label htmlFor='dark-mode'>
         {!isDarkMode ? "Lights On" : "Lights Off"}
       </Label>
-      <Switch onClick={toggleDarkMode} id='dark-mode' />
+      <Switch
+        className={`${isDarkMode ? "border border-slate-500" : ""} `}
+        onClick={toggleDarkMode}
+        id='dark-mode'
+      />
     </div>
   );
 };

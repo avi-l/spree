@@ -1,5 +1,6 @@
 "use client";
 
+import { AlertModal } from "@/components/modals/AlertModal";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -7,16 +8,19 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import Heading from "@/components/ui/heading";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { useDarkModeStore } from "@/hooks/zustandUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Store } from "@prisma/client";
+import axios from "axios";
 import { Trash } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import * as z from "zod";
 
 interface ISettingsFormProps {
@@ -27,30 +31,53 @@ const formSchema = z.object({
   name: z.string().min(1),
 });
 const SettingsForm: React.FC<ISettingsFormProps> = ({ initialData }) => {
+  const params = useParams();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const isDarkMode = useDarkModeStore((state) => state.isDarkMode);
+
   const form = useForm<TSettingsFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData,
   });
 
   const onSubmit = async (data: TSettingsFormValues) => {
-    console.log(data);
+    console.log("here", { data });
+    try {
+      setLoading(true);
+      await axios.patch(`/api/stores/${params.storeId}`, data);
+      router.refresh();
+      toast.success("Store Updated!");
+    } catch (error) {
+      toast.error("Uh oh! ");
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <>
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={() => {}}
+        loading={loading}
+      />
       <div className='flex items-center justify-between'>
         <Heading title='Settings' description='Manage store preferences' />
-        <Button variant={"destructive"} size='sm' onClick={() => {}}>
+        <Button
+          disabled={loading}
+          variant={"destructive"}
+          size='sm'
+          onClick={() => setOpen(true)}
+        >
           <Trash className='h-4 w-4' />
         </Button>
       </div>
-      <Separator className={`${isDarkMode ? "bg-slate-500" : ""}`} />
+      <Separator />
       <Form {...form}>
         <form
-          className='space-y-8 w-full'
           onSubmit={form.handleSubmit(onSubmit)}
+          className='space-y-8 w-full'
         >
           <div className='grid grid-cols-3 gap-8'>
             <FormField
@@ -60,17 +87,23 @@ const SettingsForm: React.FC<ISettingsFormProps> = ({ initialData }) => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input disabled={loading} placeholder='Store Name' />
+                    <Input
+                      disabled={loading}
+                      placeholder='Store name'
+                      {...field}
+                    />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-          <Button disabled={loading} className='ml-auto'>
-            Save Changes
+          <Button disabled={loading} className='ml-auto' type='submit'>
+            Save changes
           </Button>
         </form>
       </Form>
+      <Separator />
     </>
   );
 };

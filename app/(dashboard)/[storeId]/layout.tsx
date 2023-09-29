@@ -15,9 +15,6 @@ export default async function DashboardLayout({
   const userId = await getUserId();
   if (!userId) redirect("sign-in");
   const store = await getStoreByUserAndStoreIds(storeId, userId);
-
-  console.log("asdfasfawefawef", { userId, store });
-
   if (!store) {
     redirect(`/`);
   } else

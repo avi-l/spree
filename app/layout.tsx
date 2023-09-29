@@ -4,10 +4,7 @@ import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider } from "@/providers/ModalProvider";
 import { ToasterProvider } from "@/providers/ToastProvider";
-import { useDarkModeStore } from "@/hooks/zustandUtils";
-import DarkModeSwitchProvider from "@/providers/DarkModeSwitchProvider";
-
-const inter = Inter({ subsets: ["latin"] });
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard",
@@ -21,12 +18,18 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang='en'>
-        <body className={`${inter.className}`}>
-          <ToasterProvider />
-          <ModalProvider />
-          <DarkModeSwitchProvider />
-          {children}
+      <html lang='en' suppressHydrationWarning>
+        <body>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ToasterProvider />
+            <ModalProvider />
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

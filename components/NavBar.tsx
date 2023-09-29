@@ -1,12 +1,9 @@
 import { UserButton } from "@clerk/nextjs";
 import { MainNav } from "@/components/MainNav";
 import StoreSwitcher from "./StoreSwitcher";
-import {
-  DynamicDarkModeSwitch,
-  getAllStoresByUserId,
-  getUserId,
-} from "@/lib/utils";
+import { getAllStoresByUserId, getUserId } from "@/lib/utils";
 import { redirect } from "next/navigation";
+import DarkModeSwitch from "@/components/DarkModeSwitch";
 const NavBar = async () => {
   const userId = await getUserId();
   if (!userId) redirect("/sign-in");
@@ -17,7 +14,7 @@ const NavBar = async () => {
         <StoreSwitcher items={stores} />
         <MainNav />
         <div className='ml-auto flex items-center space-x-4'>
-          <DynamicDarkModeSwitch />
+          <DarkModeSwitch />
           <UserButton afterSignOutUrl='/' />
         </div>
       </div>

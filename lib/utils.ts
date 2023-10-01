@@ -38,7 +38,7 @@ export const getStoreByUserAndStoreIds = async (
     });
     return store || null;
   } catch (error) {
-    toast.error("Error validating store");
+    toast.error("Error finding store");
     return null;
   }
 };
@@ -51,7 +51,20 @@ export const getStoreByStoreId = async (storeId: string) => {
     });
     return store || null;
   } catch (error) {
-    toast.error("Error validating store");
+    toast.error("Error finding store");
+    return null;
+  }
+};
+export const getBillboardByBillboardId = async (billboardId: string) => {
+  try {
+    const billboard = await prismadb.billboard.findUnique({
+      where: {
+        id: billboardId,
+      },
+    });
+    return billboard || null;
+  } catch (error) {
+    toast.error("Error finding billboard");
     return null;
   }
 };
@@ -65,7 +78,7 @@ export const getStoreByUserId = async (userId: string) => {
     });
     return store || null;
   } catch (error) {
-    toast.error("Error validating store");
+    toast.error("Error finding store");
     return null;
   }
 };
@@ -78,6 +91,6 @@ export const getAllStoresByUserId = async (userId: string) => {
     });
     return store;
   } catch (error) {
-    toast.error("Error validating store");
+    toast.error("Error finding store");
   }
 };

@@ -38,7 +38,7 @@ export const getStoreByUserAndStoreIds = async (
     });
     return store || null;
   } catch (error) {
-    toast.error("Error finding store");
+    //toast.error("Error finding store");
     return null;
   }
 };
@@ -51,7 +51,7 @@ export const getStoreByStoreId = async (storeId: string) => {
     });
     return store || null;
   } catch (error) {
-    toast.error("Error finding store");
+    //toast.error("Error finding store");
     return null;
   }
 };
@@ -64,7 +64,7 @@ export const getBillboardByBillboardId = async (billboardId: string) => {
     });
     return billboard || null;
   } catch (error) {
-    toast.error("Error finding billboard");
+    //toast.error("Error finding billboard");
     return null;
   }
 };
@@ -78,7 +78,7 @@ export const getStoreByUserId = async (userId: string) => {
     });
     return store || null;
   } catch (error) {
-    toast.error("Error finding store");
+    //toast.error("Error finding store");
     return null;
   }
 };
@@ -91,6 +91,18 @@ export const getAllStoresByUserId = async (userId: string) => {
     });
     return store;
   } catch (error) {
-    toast.error("Error finding store");
+    //toast.error("Error finding store");
+  }
+};
+export const getAllBillboardsByStoreId = async (storeId: string) => {
+  try {
+    const store = await prismadb.billboard.findMany({
+      where: {
+        storeId,
+      },
+    });
+    return store;
+  } catch (error) {
+    //toast.error("Error finding store");
   }
 };

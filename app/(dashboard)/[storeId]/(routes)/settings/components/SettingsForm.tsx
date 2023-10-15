@@ -50,7 +50,7 @@ const SettingsForm: React.FC<ISettingsFormProps> = ({ initialData }) => {
       router.refresh();
       toast.success("Store Updated!");
     } catch (error) {
-      toast.error("Uh oh! ");
+      //toast.error("Uh oh! ");
     } finally {
       setLoading(false);
     }
@@ -63,7 +63,7 @@ const SettingsForm: React.FC<ISettingsFormProps> = ({ initialData }) => {
       router.push("/");
       toast.success("Store Deleted!");
     } catch (error) {
-      toast.error("Make sure you remove all products and categories first");
+      //toast.error("Make sure you remove all products and categories first");
     } finally {
       setLoading(false);
     }

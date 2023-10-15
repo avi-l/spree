@@ -3,17 +3,23 @@
 import { Button } from "@/components/ui/button";
 import Heading from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
+
 import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
+import { TBillboardColumn, columns } from "./columns";
+import { DataTable } from "@/components/ui/data-table";
 
-export const BillbaordClient = () => {
+interface IBillboardClientProps {
+  data: TBillboardColumn[];
+}
+export const BillbaordClient: React.FC<IBillboardClientProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
   return (
     <>
       <div className='flex items-center justify-between'>
         <Heading
-          title='Billboards (0)'
+          title={`Billboards (${data.length})`}
           description='Manage billboards for your store'
         />
         <Button
@@ -23,6 +29,7 @@ export const BillbaordClient = () => {
         </Button>
       </div>
       <Separator />
+      <DataTable columns={columns} data={data} filterKey='label' />
     </>
   );
 };

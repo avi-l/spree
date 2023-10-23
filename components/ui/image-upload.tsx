@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button";
 import { ImagePlus, Trash } from "lucide-react";
 import Image from "next/image";
 import { CldUploadWidget } from "next-cloudinary";
+
 interface IImageUploadProps {
   disabled?: boolean;
   onChange: (value: string) => void;
   onRemove: (value: string) => void;
   value: string[];
 }
+
 const ImageUpload: React.FC<IImageUploadProps> = ({
   disabled = true,
   onChange,

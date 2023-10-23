@@ -1,5 +1,5 @@
 import { getAllBillboardsByStoreId } from "@/lib/utils";
-import { BillbaordClient } from "./components/client";
+import { BillboardClient } from "./components/client";
 import { TBillboardColumn } from "./components/columns";
 import { format } from "date-fns";
 
@@ -13,7 +13,7 @@ const Billboards = async ({ params }: { params: { storeId: string } }) => {
   return (
     <div className='flex-col'>
       <div className='flex-1 space-y-4 p-8 pt-6'>
-        <BillbaordClient data={formattedBillboards} />
+        <BillboardClient data={formattedBillboards} />
       </div>
     </div>
   );

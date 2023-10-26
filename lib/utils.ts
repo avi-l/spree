@@ -68,6 +68,19 @@ export const getBillboardByBillboardId = async (billboardId: string) => {
     return null;
   }
 };
+export const getSizeBySizeId = async (sizeId: string) => {
+  try {
+    const size = await prismadb.size.findUnique({
+      where: {
+        id: sizeId,
+      },
+    });
+    return size || null;
+  } catch (error) {
+    //toast.error("Error finding billboard");
+    return null;
+  }
+};
 export const getCategoriesByCategoryId = async (categoryId: string) => {
   try {
     const billboard = await prismadb.category.findUnique({
@@ -122,6 +135,25 @@ export const getAllBillboardsByStoreId = async (
       },
     });
     return billboards;
+  } catch (error) {
+    return [];
+    //toast.error("Error finding store");
+  }
+};
+export const getAllSizesByStoreId = async (
+  storeId: string,
+  orderBy: "asc" | "desc" = "desc"
+) => {
+  try {
+    const sizes = await prismadb.size.findMany({
+      where: {
+        storeId,
+      },
+      orderBy: {
+        createdAt: orderBy,
+      },
+    });
+    return sizes;
   } catch (error) {
     return [];
     //toast.error("Error finding store");

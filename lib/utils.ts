@@ -81,6 +81,19 @@ export const getSizeBySizeId = async (sizeId: string) => {
     return null;
   }
 };
+export const getColorByColorId = async (colorId: string) => {
+  try {
+    const color = await prismadb.color.findUnique({
+      where: {
+        id: colorId,
+      },
+    });
+    return color || null;
+  } catch (error) {
+    //toast.error("Error finding billboard");
+    return null;
+  }
+};
 export const getCategoriesByCategoryId = async (categoryId: string) => {
   try {
     const billboard = await prismadb.category.findUnique({
@@ -146,6 +159,25 @@ export const getAllSizesByStoreId = async (
 ) => {
   try {
     const sizes = await prismadb.size.findMany({
+      where: {
+        storeId,
+      },
+      orderBy: {
+        createdAt: orderBy,
+      },
+    });
+    return sizes;
+  } catch (error) {
+    return [];
+    //toast.error("Error finding store");
+  }
+};
+export const getAllColorsByStoreId = async (
+  storeId: string,
+  orderBy: "asc" | "desc" = "desc"
+) => {
+  try {
+    const sizes = await prismadb.color.findMany({
       where: {
         storeId,
       },

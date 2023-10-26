@@ -1,6 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+
 import CellAction from "./cell-action";
 
 export type TColorsColumn = {
@@ -18,6 +19,15 @@ export const columns: ColumnDef<TColorsColumn>[] = [
   {
     accessorKey: "value",
     header: "Value",
+    cell: ({ row }) => (
+      <div className='flex items-center gap-x-2'>
+        <div
+          className='h-6 w-6 rounded-full border'
+          style={{ backgroundColor: row.original.value }}
+        />
+        {row.original.value}
+      </div>
+    ),
   },
   {
     accessorKey: "createdAt",

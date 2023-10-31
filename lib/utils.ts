@@ -68,6 +68,19 @@ export const getBillboardByBillboardId = async (billboardId: string) => {
     return null;
   }
 };
+export const getProductByProductId = async (productId: string) => {
+  try {
+    const product = await prismadb.product.findUnique({
+      where: {
+        id: productId,
+      },
+    });
+    return product || null;
+  } catch (error) {
+    //toast.error("Error finding product");
+    return null;
+  }
+};
 export const getSizeBySizeId = async (sizeId: string) => {
   try {
     const size = await prismadb.size.findUnique({
@@ -153,6 +166,30 @@ export const getAllBillboardsByStoreId = async (
     //toast.error("Error finding store");
   }
 };
+export const getAllProductsByStoreId = async (
+  storeId: string,
+  orderBy: "asc" | "desc" = "desc"
+) => {
+  try {
+    const products = await prismadb.product.findMany({
+      where: {
+        storeId,
+      },
+      include: {
+        category: true,
+        size: true,
+        color: true,
+      },
+      orderBy: {
+        createdAt: orderBy,
+      },
+    });
+    return products;
+  } catch (error) {
+    return [];
+    //toast.error("Error finding store");
+  }
+};
 export const getAllSizesByStoreId = async (
   storeId: string,
   orderBy: "asc" | "desc" = "desc"
@@ -213,3 +250,8 @@ export const getAllCategoriesByStoreId = async (
     //toast.error("Error finding store");
   }
 };
+
+export const formatter = new Intl.NumberFormat("en-us", {
+  style: "currency",
+  currency: "USD",
+});

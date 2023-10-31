@@ -74,6 +74,9 @@ export const getProductByProductId = async (productId: string) => {
       where: {
         id: productId,
       },
+      include: {
+        images: true,
+      },
     });
     return product || null;
   } catch (error) {
@@ -162,20 +165,30 @@ export const getAllBillboardsByStoreId = async (
     });
     return billboards;
   } catch (error) {
+    toast.error("Error finding store");
     return [];
-    //toast.error("Error finding store");
   }
 };
 export const getAllProductsByStoreId = async (
   storeId: string,
-  orderBy: "asc" | "desc" = "desc"
+  orderBy: "asc" | "desc" = "desc",
+  sizeId: string | undefined,
+  colorId: string | undefined,
+  isFeatured: boolean | undefined,
+  categoryId: string | undefined
 ) => {
   try {
     const products = await prismadb.product.findMany({
       where: {
         storeId,
+        categoryId,
+        sizeId,
+        colorId,
+        isFeatured,
+        isArchived: false,
       },
       include: {
+        images: true,
         category: true,
         size: true,
         color: true,
@@ -186,8 +199,8 @@ export const getAllProductsByStoreId = async (
     });
     return products;
   } catch (error) {
+    toast.error("Error finding store");
     return [];
-    //toast.error("Error finding store");
   }
 };
 export const getAllSizesByStoreId = async (

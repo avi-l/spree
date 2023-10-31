@@ -1,14 +1,20 @@
-import { getAllProductsByStoreId } from "@/lib/utils";
+import { formatter, getAllProductsByStoreId } from "@/lib/utils";
 import { ProductClient } from "./components/client";
 import { TProductColumn } from "./components/columns";
 import { format } from "date-fns";
 
 const Products = async ({ params }: { params: { storeId: string } }) => {
   const products = await getAllProductsByStoreId(params.storeId);
-  const formattedProducts: TProductColumn[] = products.map((bb) => ({
-    id: bb.id,
-    label: bb.label,
-    createdAt: format(bb.createdAt, "MMMM do, yyyy"),
+  const formattedProducts: TProductColumn[] = products.map((item) => ({
+    id: item.id,
+    name: item.name,
+    isFeatured: item.isFeatured,
+    isArchived: item.isArchived,
+    price: formatter.format(item.price.toNumber()),
+    category: item.category.name,
+    size: item.size.name,
+    color: item.color.value,
+    createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));
   return (
     <div className='flex-col'>

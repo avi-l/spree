@@ -16,6 +16,12 @@ export async function GET(
       where: {
         id: params.productid,
       },
+      include: {
+        images: true,
+        category: true,
+        size: true,
+        color: true,
+      },
     });
 
     return NextResponse.json(product);
@@ -46,7 +52,6 @@ export async function PATCH(
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
-
     if (!name) {
       return new NextResponse("name required", { status: 400 });
     }

@@ -169,6 +169,25 @@ export const getAllBillboardsByStoreId = async (
     return [];
   }
 };
+export const getAllOrdersByStoreId = async (
+  storeId: string,
+  orderBy: "asc" | "desc" = "desc"
+) => {
+  try {
+    const orders = await prismadb.order.findMany({
+      where: {
+        storeId,
+      },
+      orderBy: {
+        createdAt: orderBy,
+      },
+    });
+    return orders;
+  } catch (error) {
+    toast.error("Error finding store");
+    return [];
+  }
+};
 export const getAllProductsByStoreId = async (
   storeId: string,
   orderBy: "asc" | "desc" = "desc",

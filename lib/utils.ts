@@ -178,6 +178,13 @@ export const getAllOrdersByStoreId = async (
       where: {
         storeId,
       },
+      include: {
+        orderItems: {
+          include: {
+            product: true,
+          },
+        },
+      },
       orderBy: {
         createdAt: orderBy,
       },

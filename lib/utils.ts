@@ -150,17 +150,14 @@ export const getAllStoresByUserId = async (userId: string) => {
     //toast.error("Error finding store");
   }
 };
-export const getAllBillboardsByStoreId = async (
-  storeId: string,
-  orderBy: "asc" | "desc" = "desc"
-) => {
+export const getAllBillboardsByStoreId = async (storeId: string) => {
   try {
     const billboards = await prismadb.billboard.findMany({
       where: {
         storeId,
       },
       orderBy: {
-        createdAt: orderBy,
+        createdAt: "desc",
       },
     });
     return billboards;
@@ -169,10 +166,7 @@ export const getAllBillboardsByStoreId = async (
     return [];
   }
 };
-export const getAllOrdersByStoreId = async (
-  storeId: string,
-  orderBy: "asc" | "desc" = "desc"
-) => {
+export const getAllOrdersByStoreId = async (storeId: string) => {
   try {
     const orders = await prismadb.order.findMany({
       where: {
@@ -186,7 +180,7 @@ export const getAllOrdersByStoreId = async (
         },
       },
       orderBy: {
-        createdAt: orderBy,
+        createdAt: "desc",
       },
     });
     return orders;
@@ -236,17 +230,14 @@ export const getAllProductsByStoreId = async ({
     return [];
   }
 };
-export const getAllSizesByStoreId = async (
-  storeId: string,
-  orderBy: "asc" | "desc" = "desc"
-) => {
+export const getAllSizesByStoreId = async (storeId: string) => {
   try {
     const sizes = await prismadb.size.findMany({
       where: {
         storeId,
       },
       orderBy: {
-        createdAt: orderBy,
+        createdAt: "desc",
       },
     });
     return sizes;
@@ -255,17 +246,14 @@ export const getAllSizesByStoreId = async (
     //toast.error("Error finding store");
   }
 };
-export const getAllColorsByStoreId = async (
-  storeId: string,
-  orderBy: "asc" | "desc" = "desc"
-) => {
+export const getAllColorsByStoreId = async (storeId: string) => {
   try {
     const sizes = await prismadb.color.findMany({
       where: {
         storeId,
       },
       orderBy: {
-        createdAt: orderBy,
+        createdAt: "desc",
       },
     });
     return sizes;
@@ -274,10 +262,7 @@ export const getAllColorsByStoreId = async (
     //toast.error("Error finding store");
   }
 };
-export const getAllCategoriesByStoreId = async (
-  storeId: string,
-  orderBy: "asc" | "desc" = "desc"
-) => {
+export const getAllCategoriesByStoreId = async (storeId: string) => {
   try {
     const categories = await prismadb.category.findMany({
       where: {
@@ -287,7 +272,7 @@ export const getAllCategoriesByStoreId = async (
         billboard: true,
       },
       orderBy: {
-        createdAt: orderBy,
+        createdAt: "desc",
       },
     });
     return categories;

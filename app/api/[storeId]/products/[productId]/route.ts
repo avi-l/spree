@@ -5,16 +5,17 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   _req: Request,
-  { params }: { params: { productid: string } }
+  { params }: { params: { productId: string } }
 ) {
+  console.log(params);
   try {
-    if (!params.productid) {
+    if (!params.productId) {
       return new NextResponse("Product ID Required", { status: 400 });
     }
 
     const product = await prismadb.product.findUnique({
       where: {
-        id: params.productid,
+        id: params.productId,
       },
       include: {
         images: true,
@@ -119,7 +120,7 @@ export async function PATCH(
 
 export async function DELETE(
   _req: Request,
-  { params }: { params: { storeId: string; productid: string } }
+  { params }: { params: { storeId: string; productId: string } }
 ) {
   try {
     const { userId } = auth();
@@ -128,7 +129,7 @@ export async function DELETE(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    if (!params.productid) {
+    if (!params.productId) {
       return new NextResponse("Product ID Required", { status: 400 });
     }
 
@@ -138,7 +139,7 @@ export async function DELETE(
     }
     const product = await prismadb.product.deleteMany({
       where: {
-        id: params.productid,
+        id: params.productId,
       },
     });
 

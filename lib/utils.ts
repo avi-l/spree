@@ -195,14 +195,21 @@ export const getAllOrdersByStoreId = async (
     return [];
   }
 };
-export const getAllProductsByStoreId = async (
-  storeId: string,
-  orderBy: "asc" | "desc" = "desc",
-  sizeId: string | undefined,
-  colorId: string | undefined,
-  isFeatured: boolean | undefined,
-  categoryId: string | undefined
-) => {
+
+type TGetAllProductsByStoreIdProps = {
+  params: {
+    storeId: string;
+    orderBy: "asc" | "desc";
+    sizeId: string | undefined;
+    colorId: string | undefined;
+    isFeatured: boolean | undefined;
+    categoryId: string | undefined;
+  };
+};
+export const getAllProductsByStoreId = async ({
+  params,
+}: TGetAllProductsByStoreIdProps) => {
+  const { storeId, orderBy, sizeId, colorId, isFeatured, categoryId } = params;
   try {
     const products = await prismadb.product.findMany({
       where: {

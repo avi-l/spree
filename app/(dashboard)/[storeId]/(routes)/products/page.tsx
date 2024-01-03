@@ -2,9 +2,22 @@ import { formatter, getAllProductsByStoreId } from "@/lib/utils";
 import { ProductClient } from "./components/client";
 import { TProductColumn } from "./components/columns";
 import { format } from "date-fns";
+import prismadb from "@/lib/prismadb";
 
 const Products = async ({ params }: { params: { storeId: string } }) => {
-  const products = await getAllProductsByStoreId(params.storeId);
+  const products = await prismadb.product.findMany({
+    where: {
+      storeId: params.storeId,
+    },
+    include: {
+      category: true,
+      size: true,
+      color: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
   const formattedProducts: TProductColumn[] = products.map((item) => ({
     id: item.id,
     name: item.name,

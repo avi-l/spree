@@ -13,7 +13,8 @@
 
 import { authMiddleware } from "@clerk/nextjs";
 
-const isDevelopment = process.env.NODE_ENV === "development";
+const isDevelopment = true;
+// const isDevelopment = process.env.NODE_ENV === "development";
 
 // Conditionally apply authMiddleware based on environment
 const middleware = isDevelopment

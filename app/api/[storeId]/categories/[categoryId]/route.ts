@@ -7,6 +7,8 @@ export async function GET(
   _req: Request,
   { params }: { params: { categoryId: string } }
 ) {
+  console.log("REQUEST>>>>>>", _req);
+  console.log("PARAMS>>>>>>", params);
   try {
     if (!params.categoryId) {
       return new NextResponse("Category ID Required", { status: 400 });

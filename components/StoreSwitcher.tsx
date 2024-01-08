@@ -37,7 +37,7 @@ export default function StoreSwitcher({
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
-  const formattedItems = items.map((item) => ({
+  const formattedItems = items?.map((item) => ({
     label: item.name,
     value: item.id,
   }));
@@ -72,7 +72,7 @@ export default function StoreSwitcher({
             <CommandInput placeholder='Search store...' />
             <CommandEmpty> No Store Found</CommandEmpty>
             <CommandGroup heading='Stores'>
-              {formattedItems.map((store) => (
+              {formattedItems?.map((store) => (
                 <CommandItem
                   key={store.value}
                   onSelect={() => onStoreSelect(store)}

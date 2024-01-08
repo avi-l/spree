@@ -159,7 +159,7 @@ const ProductForm: React.FC<IProductFormProps> = ({
                 <FormLabel>Images</FormLabel>
                 <FormControl>
                   <ImageUpload
-                    value={field.value.map((image) => image.url)}
+                    value={field.value?.map((image) => image.url)}
                     disabled={loading}
                     onChange={(url) =>
                       field.onChange([...field.value, { url }])

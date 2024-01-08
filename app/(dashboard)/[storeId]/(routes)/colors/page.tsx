@@ -5,7 +5,7 @@ import { format } from "date-fns";
 
 const ColorsPage = async ({ params }: { params: { storeId: string } }) => {
   const colors = await getAllColorsByStoreId(params.storeId);
-  const formattedColors: TColorsColumn[] = colors.map((color) => ({
+  const formattedColors: TColorsColumn[] = colors?.map((color) => ({
     id: color.id,
     name: color.name,
     value: color.value,

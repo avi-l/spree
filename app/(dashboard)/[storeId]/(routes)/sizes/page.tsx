@@ -5,7 +5,7 @@ import { format } from "date-fns";
 
 const SizesPage = async ({ params }: { params: { storeId: string } }) => {
   const sizes = await getAllSizesByStoreId(params.storeId);
-  const formattedSizes: TSizesColumn[] = sizes.map((size) => ({
+  const formattedSizes: TSizesColumn[] = sizes?.map((size) => ({
     id: size.id,
     name: size.name,
     value: size.value,

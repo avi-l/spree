@@ -5,7 +5,7 @@ import { format } from "date-fns";
 
 const Billboards = async ({ params }: { params: { storeId: string } }) => {
   const billboards = await getAllBillboardsByStoreId(params.storeId);
-  const formattedBillboards: TBillboardColumn[] = billboards.map((bb) => ({
+  const formattedBillboards: TBillboardColumn[] = billboards?.map((bb) => ({
     id: bb.id,
     label: bb.label,
     createdAt: format(bb.createdAt, "MMMM do, yyyy"),

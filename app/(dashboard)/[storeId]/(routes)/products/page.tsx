@@ -18,7 +18,7 @@ const Products = async ({ params }: { params: { storeId: string } }) => {
       createdAt: "desc",
     },
   });
-  const formattedProducts: TProductColumn[] = products.map((item) => ({
+  const formattedProducts: TProductColumn[] = products?.map((item) => ({
     id: item.id,
     name: item.name,
     isFeatured: item.isFeatured,

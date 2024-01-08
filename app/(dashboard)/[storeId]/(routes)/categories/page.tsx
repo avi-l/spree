@@ -5,7 +5,7 @@ import { CategoryClient } from "./components/client";
 
 const CategoriesPage = async ({ params }: { params: { storeId: string } }) => {
   const categories = await getAllCategoriesByStoreId(params.storeId);
-  const formattedCategories: TCategoryColumn[] = categories.map((cat) => ({
+  const formattedCategories: TCategoryColumn[] = categories?.map((cat) => ({
     id: cat.id,
     name: cat.name,
     billboardLabel: cat.billboard.label,

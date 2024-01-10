@@ -46,11 +46,11 @@ const SettingsForm: React.FC<ISettingsFormProps> = ({ initialData }) => {
   const onSubmit = async (data: TSettingsFormValues) => {
     try {
       setLoading(true);
-      await axios.patch(`/api/stores/${params.storeId}`, data);
+      await axios.patch(`/api/${params.storeId}`, data);
       router.refresh();
       toast.success("Store Updated!");
     } catch (error) {
-      //toast.error("Uh oh! ");
+      toast.error("Uh oh! ");
     } finally {
       setLoading(false);
     }
@@ -58,12 +58,13 @@ const SettingsForm: React.FC<ISettingsFormProps> = ({ initialData }) => {
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/stores/${params.storeId}`);
+      await axios.delete(`/api/${params.storeId}`);
       router.refresh();
       router.push("/");
       toast.success("Store Deleted!");
     } catch (error) {
-      //toast.error("Make sure you remove all products and categories first");
+      console.error(error);
+      toast.error("Make sure you remove all products and categories first");
     } finally {
       setLoading(false);
     }

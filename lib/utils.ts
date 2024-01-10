@@ -38,7 +38,7 @@ export const getStoreByUserAndStoreIds = async (
     });
     return store || null;
   } catch (error) {
-    //toast.error("Error finding store");
+    toast.error("Error finding store");
     return null;
   }
 };
@@ -51,7 +51,7 @@ export const getStoreByStoreId = async (storeId: string) => {
     });
     return store || null;
   } catch (error) {
-    //toast.error("Error finding store");
+    toast.error("Error finding store");
     return null;
   }
 };
@@ -64,7 +64,7 @@ export const getBillboardByBillboardId = async (billboardId: string) => {
     });
     return billboard || null;
   } catch (error) {
-    //toast.error("Error finding billboard");
+    toast.error("Error finding billboard");
     return null;
   }
 };
@@ -80,7 +80,7 @@ export const getProductByProductId = async (productId: string) => {
     });
     return product || null;
   } catch (error) {
-    //toast.error("Error finding product");
+    toast.error("Error finding product");
     return null;
   }
 };
@@ -93,7 +93,7 @@ export const getSizeBySizeId = async (sizeId: string) => {
     });
     return size || null;
   } catch (error) {
-    //toast.error("Error finding billboard");
+    toast.error("Error finding billboard");
     return null;
   }
 };
@@ -106,7 +106,7 @@ export const getColorByColorId = async (colorId: string) => {
     });
     return color || null;
   } catch (error) {
-    //toast.error("Error finding billboard");
+    toast.error("Error finding billboard");
     return null;
   }
 };
@@ -119,7 +119,7 @@ export const getCategoriesByCategoryId = async (categoryId: string) => {
     });
     return billboard || null;
   } catch (error) {
-    //toast.error("Error finding billboard");
+    toast.error("Error finding billboard");
     return null;
   }
 };
@@ -133,7 +133,7 @@ export const getStoreByUserId = async (userId: string) => {
     });
     return store || null;
   } catch (error) {
-    //toast.error("Error finding store");
+    toast.error("Error finding store");
     return null;
   }
 };
@@ -147,7 +147,7 @@ export const getAllStoresByUserId = async (userId: string) => {
     return store;
   } catch (error) {
     return [];
-    //toast.error("Error finding store");
+    toast.error("Error finding store");
   }
 };
 export const getAllBillboardsByStoreId = async (storeId: string) => {
@@ -243,7 +243,7 @@ export const getAllSizesByStoreId = async (storeId: string) => {
     return sizes;
   } catch (error) {
     return [];
-    //toast.error("Error finding store");
+    toast.error("Error finding store");
   }
 };
 export const getAllColorsByStoreId = async (storeId: string) => {
@@ -259,7 +259,7 @@ export const getAllColorsByStoreId = async (storeId: string) => {
     return sizes;
   } catch (error) {
     return [];
-    //toast.error("Error finding store");
+    toast.error("Error finding store");
   }
 };
 export const getAllCategoriesByStoreId = async (storeId: string) => {
@@ -278,7 +278,7 @@ export const getAllCategoriesByStoreId = async (storeId: string) => {
     return categories;
   } catch (error) {
     return [];
-    //toast.error("Error finding store");
+    toast.error("Error finding store");
   }
 };
 
